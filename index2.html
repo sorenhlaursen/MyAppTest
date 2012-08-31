@@ -1,0 +1,210 @@
+<!DOCTYPE html> 
+<html>
+    <head> 
+    	<title>Tauno</title> 
+    	
+    	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"> 
+        <meta name="apple-mobile-web-app-capable" content="yes">
+    	<meta name="description" content="Tauno">
+        
+    	<!-- Stylesheets -->
+        <!-- <link rel="stylesheet" href="css/default.min.css" /> -->
+        <link rel="stylesheet" href="css/jquery-mobile.min.css" />
+        <link rel="stylesheet" href="css/main.css" />
+        <link href="css/photoswipe.css" type="text/css" rel="stylesheet" />    
+        <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis:400,700' rel='stylesheet' type='text/css'>
+
+    	<!-- JavaScripts -->
+     	<script type="text/javascript" src="js/klass.min.js"></script>
+    	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    	<script src="js/jquery.mobile-1.0.1.js"></script>
+    	<script src="js/jquery.cycle.all.js"></script>
+    	<script type="text/javascript" src="js/code.photoswipe.jquery-3.0.4.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="js/misc.js"></script>
+        <script type="text/javascript" src="js/jquery.backgroundPosition.js"></script>
+
+    </head>
+    <body> 
+
+        <!-- Home Page -->
+        <div data-role="page" id="homepage" data-title="Homepage">
+            <!-- Wrapper -->
+            <div class="wrapper">
+
+                <!-- Header -->
+                <div data-role="header" class="header">
+
+                   <img id="logo" src="images/logo.png" alt="logo"> 
+
+                    <!-- Small Home Button -->
+                    <div class="btn-small btn-red ui-btn-right home-button disabled">
+                        <a href="index.html" data-transition="flip" class=''>
+                            <div class="btn-pattern">
+                                <div id="header-home-icon" class="btn-icon">
+                                </div>
+                            </div> 
+                        </a>
+                    </div>
+                    <!-- END: Small Home Button -->
+
+                </div>
+                <!-- END: Header -->
+                
+
+                <!-- Wrapper Box, Slider Container -->
+                <div class="slider_container wrapper-box shadowed">
+                    <div class="wrapper-box-inner">
+                
+                        <div class="slider_wrapper">
+                            <!-- Slider Images -->
+                            <div class="slider_images_container">
+                                <a href="http://www.google.com"><img src="images/slide1.jpg" alt="slideImage"></a>
+                                <a href="http://www.google.com"><img src="images/slide2.jpg" alt="slideImage"></a>
+                                <a href="http://www.google.com"><img src="images/slide3.jpg" alt="slideImage"></a>
+                            </div>
+                            <!-- END: Slider Images -->
+
+                            <!-- Slider Titles -->
+                            <div class="slider_title_container">
+                                <div class="slider_title">
+                                    A POST TITLE 1
+                                </div>
+                                <div class="slider_title">
+                                    A POST TITLE 2
+                                </div>
+                                <div class="slider_title">
+                                    A POST TITLE 3
+                                </div>
+                            </div>
+                            <!-- END: Slider Titles -->
+                        </div>
+
+                        <!-- Slider Nav -->
+                        <div class="slider_nav_wrapper white_pagination">
+                        </div>
+                        <!-- END: Slider Nav -->
+
+                    </div>
+            	</div>
+                <!-- END: Wrapper Box, Slider Container -->
+
+                <!-- Wrapper Box -->
+                <div class="wrapper-box whitened">
+                    <div class="wrapper-box-inner">
+                        
+                        <!-- Menu-->
+                        <ul class="menu red-menu">
+                            <!-- Menu Item -->
+                            <li>
+                                <a href="category.html" data-transition="flip">
+                                    <img class="menu-icon" src="images/menu-blog.png" alt="blog-icon">
+                                    Blog Categories
+                                </a>
+                            </li>
+
+                            <!-- Menu Item -->
+                            <li>
+                                <a href="gallery.html" data-transition="flip">
+                                    <img class="menu-icon" src="images/menu-gallery.png" alt="gallery-icon">
+                                    Image Gallery
+                                </a>
+                            </li>
+
+                            <!-- Menu Item -->
+                            <li>
+                                <a href="page.html" data-transition="flip">
+                                    <img class="menu-icon" src="images/menu-about.png" alt="about-icon">
+                                    About Tauno Theme
+                                </a>
+                            </li>
+
+                            <!-- Menu Item -->
+                            <li>
+                                <a href="contact.html" data-transition="flip">
+                                    <img class="menu-icon" src="images/menu-contact.png" alt="contact-icon">
+                                    Contact Us
+                                </a>
+                            </li>
+                        </ul>
+                        <!--END: Menu -->
+
+                    </div>
+                </div>
+                <!-- END: Wrapper Box -->
+
+                <!-- Wrapper Box, Social Icons -->
+                <div class="social_icons wrapper-box shadowed">
+                    <div class="wrapper-box-inner">
+
+                        <div class="left_container text-left">
+                            <!-- Facebook Icon -->
+                            <a href="#"><img class="social_icon" src="images/fb.png"></a>
+                        </div>
+                        <div class="center_container text-center">
+                            <!-- Twitter Icon -->
+                            <a href="#"><img class="social_icon" src="images/twitter.png"></a>
+                        </div>
+                        <div class="right_container text-right">
+                            <!-- Mail Icon -->
+                            <a href="#"><img class="social_icon" src="images/mail.png"></a>
+                        </div>
+                        <div class="clear"></div>
+
+                    </div>
+                </div>
+                <!-- END: Wrapper Box, Social Icons -->
+
+
+                <!-- Footer -->
+                <div data-role="footer" class="footer">
+                    <div class="switcher_container">
+                        <div class="switcher_text left_container text-right">
+                            MOBILE VERSION
+                        </div>
+                        <div class="center_container">
+                            <div class="switcher">
+                                <img class="handle" src="images/switcher-handle.png" alt="handle">
+                            </div>
+                        </div>  
+                        <div class="switcher_text right_container text-left">
+                            DESKTOP VERSION
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Footer -->
+
+
+            </div>
+            <!--END: Wrapper -->
+            
+            <!-- Page Script -->
+            <script type="text/javascript">
+                $('div[data-role="page"]').on('pagebeforeshow',function(event, ui){
+                    if($('.slider_nav_wrapper a').size() == 0){
+                        var titles = $('.slider_wrapper').find('.slider_title').fadeTo(0,0);
+                        $('.slider_images_container a').each(function(i,val){ $(this).data('id',i); })
+                        $('.slider_images_container').eq(0).cycle({ 
+                            fx:     'fade', 
+                            speed:  'fast', 
+                            timeout: 3000, 
+                            pager:  '.slider_nav_wrapper',
+                            activePagerClass:'active',
+                            before: function(currSlideElement, nextSlideElement, options, forwardFlag){
+                                titles.eq($(currSlideElement).data('id')).stop().fadeTo(300,0);
+                                titles.eq($(nextSlideElement).data('id')).stop().fadeTo(300,1);
+                            },
+                            pagerAnchorBuilder:function(index, DOMelement){
+                                return '<a href="#"><div class="slider_nav_dot"></div></a>';
+                            }
+                        });
+                    }
+                });
+            </script>
+            <!-- END: Page Script -->
+            
+        </div>
+        <!-- END: Homepage -->
+
+    </body>
+</html>
