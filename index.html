@@ -1,43 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geolocation Position Example</title>
-    <script src="phonegap.js"></script>
+    <title>Device Properties Example</title>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-    // Set an event to wait for Cordova to load
+    // Wait for Cordova to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    // Cordova is loaded and Ready
+    // Cordova is ready
     //
     function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
+        var element = document.getElementById('deviceProperties');
 
-    // Display `Position` properties from the geolocation
-    //
-    function onSuccess(position) {
-        var div = document.getElementById('myDiv');
-
-        div.innerHTML = 'Latitude: '             + position.coords.latitude  + '<br/>' +
-                        'Longitude: '            + position.coords.longitude + '<br/>' +
-                        'Altitude: '             + position.coords.altitude  + '<br/>' +
-                        'Accuracy: '             + position.coords.accuracy  + '<br/>' +
-                        'Altitude Accuracy: '    + position.coords.altitudeAccuracy  + '<br/>' +
-                        'Heading: '              + position.coords.heading   + '<br/>' +
-                        'Speed: '                + position.coords.speed     + '<br/>';
-    }
-
-    // Show an alert if there is a problem getting the geolocation
-    //
-    function onError() {
-        alert('onError!');
+        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
+                            'Device Cordova: '  + device.cordova + '<br />' + 
+                            'Device Platform: ' + device.platform + '<br />' + 
+                            'Device UUID: '     + device.uuid     + '<br />' + 
+                            'Device Version: '  + device.version  + '<br />';
     }
 
     </script>
   </head>
   <body>
-    <div id="myDiv"></div>
+    <p id="deviceProperties">Loading device properties...</p>
   </body>
 </html>
