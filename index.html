@@ -41,22 +41,7 @@
     window.addEventListener('load', function() { 
       PULL.init({
         success: function(callback) {
-          // simulate a network request that takes 2 seconds
-          window.setTimeout(function() {
-            var l = document.getElementById('list');
-            for(var i = 0; i < 5; i++) { // insert 5 new items
-              var li = document.createElement('li');
-              li.innerHTML = 'List Item ' + Math.floor(Math.random() * 100);
-              li.style.opacity = 0;
-              l.insertBefore(li, l.firstChild);
-            }
-            window.setTimeout(function() {
-              for(var i = 0; i < 5; i++) {
-                l.children[i].style.opacity = 1;
-              }
-            }, 0);
-            callback();  // pull callback when finished
-          }, 2000);
+		  document.location.reload(true);
         },
         start: function() {
           console.log('start');
