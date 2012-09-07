@@ -29,7 +29,7 @@
                             'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
                             'Heading: '            + position.coords.heading               + '<br />' +
                             'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          +                                   position.timestamp          + '<br />';
+                            'Timestamp: '          + position.timestamp          		   + '<br />';
     }
 
     // onError Callback receives a PositionError object
@@ -38,10 +38,32 @@
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
+	
+	function reportGeoPosition(){
+		post_to_url('http://my.spongy.dk/save_position.php',{'lat':position.coords.latitude,'long':position.coords.longitude,'accu':position.coords.accuracy,'timestamp':position.timestamp});
+	}
+	
+	function post_to_url(path,params,method){
+	  method=method||"post";
+	  var form=document.createElement("form");
+	  form.setAttribute("method",method);
+	  form.setAttribute("action",path);
+	  for(var key in params){
+		var hiddenField=document.createElement("input");
+		hiddenField.setAttribute("type","hidden");
+		hiddenField.setAttribute("name",key);
+		hiddenField.setAttribute("value",params[key]);
+		form.appendChild(hiddenField);
+	  }
+	  document.body.appendChild(form);
+	  form.submit();
+}
+	
 
     </script>
   </head>
   <body>
-    <p id="geolocation">Finding geolocation...</p>
+    <div id="geolocation">Finding geolocation...</div>
+	<p><a href="#" onclick="reportGeoPosition();" style="padding:5px;background:#8cb751;">Report position</a></p>
   </body>
 </html>
