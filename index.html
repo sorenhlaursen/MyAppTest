@@ -13,7 +13,9 @@
     // Cordova is ready
     //
     function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		window.setInterval(function(){
+			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		}, 500);
     }
 
     // onSuccess Geolocation
