@@ -1,71 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geolocation Position Example</title>
-    <script src="cordova.js"></script>
-    <script src="pull.js"></script>
+    <title>Device Properties Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-    // Set an event to wait for Cordova to load
+    // Wait for Cordova to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    // Cordova is loaded and Ready
+    // Cordova is ready
     //
     function onDeviceReady() {
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
-		listenerRefresh();
     }
 
-    // Display `Position` properties from the geolocation
+    // onSuccess Geolocation
     //
     function onSuccess(position) {
-        var div = document.getElementById('myDiv');
-
-        div.innerHTML = 'Latitude: '             + position.coords.latitude  + '<br/>' +
-                        'Longitude: '            + position.coords.longitude + '<br/>' +
-                        'Altitude: '             + position.coords.altitude  + '<br/>' +
-                        'Accuracy: '             + position.coords.accuracy  + '<br/>' +
-                        'Altitude Accuracy: '    + position.coords.altitudeAccuracy  + '<br/>' +
-                        'Heading: '              + position.coords.heading   + '<br/>' +
-                        'Speed: '                + position.coords.speed     + '<br/>';
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                            'Longitude: '          + position.coords.longitude             + '<br />' +
+                            'Altitude: '           + position.coords.altitude              + '<br />' +
+                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                            'Heading: '            + position.coords.heading               + '<br />' +
+                            'Speed: '              + position.coords.speed                 + '<br />' +
+                            'Timestamp: '          +                                   position.timestamp          + '<br />';
     }
 
-    // Show an alert if there is a problem getting the geolocation
+    // onError Callback receives a PositionError object
     //
-    function onError() {
-        alert('onError!');
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
     }
-	
-	function listenerRefresh() {
-    window.addEventListener('load', function() { 
-      PULL.init({
-        success: function(callback) {
-		  document.location.reload(true);
-        },
-        start: function() {
-          console.log('start');
-        },
-        cancel: function() {
-          //alert('cancel');
-        }
-      });
-     }, false);
-	}
 
     </script>
-	
-	<style>
-		#window { height: 100%; overflow: hidden }
-		#pull_to_refresh, #refreshing { line-height: 50px; text-align: center }
-	</style>	
-	
   </head>
   <body>
-    <div id='window'>
-		<div id='pull_to_refresh'>Pull and release to refresh</div>
-          <div style='display: none' id='refreshing'><img src='data:image/gif;base64,R0lGODlhEAAQAMQAAP%2F%2F%2F%2B7u7t3d3bu7u6qqqpmZmYiIiHd3d2ZmZlVVVURERDMzMyIiIhEREQARAAAAAP%2F%2F%2FwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH%2FC05FVFNDQVBFMi4wAwEAAAAh%2BQQFBwAQACwAAAAAEAAQAAAFdyAkQgGJJOWoQgIjBM8jkKsoPEzgyMGsCjPDw7ADpkQBxRDmSCRetpRA6Rj4kFBkgLC4IlUGhbNQIwXOYYWCXDufzYPDMaoKGBoKb886OjAKdgZAAgQkfCwzAgsDBAUCgl8jAQkHEAVkAoA1AgczlyIDczUDA2UhACH5BAUHABAALAAAAAAPABAAAAVjICSO0IGIATkqIiMKDaGKC8Q49jPMYsE0hQdrlABCGgvT45FKiRKQhWA0mPKGPAgBcTjsspBCAoH4gl%2BFmXNEUEBVAYHToJAVZK%2FXWoQQDAgBZioHaX8igigFKYYQVlkCjiMhACH5BAUHABAALAAAAAAQAA8AAAVgICSOUGGQqIiIChMESyo6CdQGdRqUENESI8FAdFgAFwqDISYwPB4CVSMnEhSej%2BFogNhtHyfRQFmIol5owmEta%2FfcKITB6y4choMBmk7yGgSAEAJ8JAVDgQFmKUCCZnwhACH5BAUHABAALAAAAAAQABAAAAViICSOYkGe4hFAiSImAwotB%2Bsi6Co2QxvjAYHIgBAqDoWCK2Bq6A40iA4yYMggNZKwGFgVCAQZotFwwJIF4QnxaC9IsZNgLtAJDKbraJCGzPVSIgEDXVNXA0JdgH6ChoCKKCEAIfkEBQcAEAAsAAAAABAADgAABUkgJI7QcZComIjPw6bs2kINLB5uW9Bo0gyQx8LkKgVHiccKVdyRlqjFSAApOKOtR810StVeU9RAmLqOxi0qRG3LptikAVQEh4UAACH5BAUHABAALAAAAAAQABAAAAVxICSO0DCQKBQQonGIh5AGB2sYkMHIqYAIN0EDRxoQZIaC6bAoMRSiwMAwCIwCggRkwRMJWKSAomBVCc5lUiGRUBjO6FSBwWggwijBooDCdiFfIlBRAlYBZQ0PWRANaSkED1oQYHgjDA8nM3kPfCmejiEAIfkEBQcAEAAsAAAAABAAEAAABWAgJI6QIJCoOIhFwabsSbiFAotGMEMKgZoB3cBUQIgURpFgmEI0EqjACYXwiYJBGAGBgGIDWsVicbiNEgSsGbKCIMCwA4IBCRgXt8bDACkvYQF6U1OADg8mDlaACQtwJCEAIfkEBQcAEAAsAAABABAADwAABV4gJEKCOAwiMa4Q2qIDwq4wiriBmItCCREHUsIwCgh2q8MiyEKODK7ZbHCoqqSjWGKI1d2kRp%2BRAWGyHg%2BDQUEmKliGx4HBKECIMwG61AgssAQPKA19EAxRKz4QCVIhACH5BAUHABAALAAAAAAQABAAAAVjICSOUBCQqHhCgiAOKyqcLVvEZOC2geGiK5NpQBAZCilgAYFMogo%2FJ0lgqEpHgoO2%2BGIMUL6p4vFojhQNg8rxWLgYBQJCASkwEKLC17hYFJtRIwwBfRAJDk4ObwsidEkrWkkhACH5BAUHABAALAAAAQAQAA8AAAVcICSOUGAGAqmKpjis6vmuqSrUxQyPhDEEtpUOgmgYETCCcrB4OBWwQsGHEhQatVFhB%2FmNAojFVsQgBhgKpSHRTRxEhGwhoRg0CCXYAkKHHPZCZRAKUERZMAYGMCEAIfkEBQcAEAAsAAABABAADwAABV0gJI4kFJToGAilwKLCST6PUcrB8A70844CXenwILRkIoYyBRk4BQlHo3FIOQmvAEGBMpYSop%2FIgPBCFpCqIuEsIESHgkgoJxwQAjSzwb1DClwwgQhgAVVMIgVyKCEAIfkECQcAEAAsAAAAABAAEAAABWQgJI5kSQ6NYK7Dw6xr8hCw%2BELC85hCIAq3Am0U6JUKjkHJNzIsFAqDqShQHRhY6bKqgvgGCZOSFDhAUiWCYQwJSxGHKqGAE%2F5EqIHBjOgyRQELCBB7EAQHfySDhGYQdDWGQyUhADs%3D'> Refreshing</div>
-		<div id="myDiv"></div>
-	</div>
+    <p id="geolocation">Finding geolocation...</p>
   </body>
 </html>
