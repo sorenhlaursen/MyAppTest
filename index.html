@@ -41,7 +41,6 @@
 	
 	function reportGeoPosition(){
 		alert('Tjek Report 1');
-		position = navigator.geolocation.getCurrentPosition;
 		var lat = position.coords.latitude;
 		alert(lat);
 		post_to_url('http://my.spongy.dk/save_position.php',{'lat':'lat','long':'432','accu':'2','timestamp':'12.12.12 43:23'});
@@ -81,6 +80,6 @@
   </head>
   <body>
     <div id="geolocation">Finding geolocation...</div>
-	<p><a href="#" onclick="reportGeoPosition();" style="padding:5px;background:#8cb751;">Report position</a></p>
+	<p><a href="#" onclick="reportGeoPosition(position);" style="padding:5px;background:#8cb751;">Report position</a></p>
   </body>
 </html>
