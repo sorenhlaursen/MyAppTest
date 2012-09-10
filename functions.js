@@ -1,38 +1,3 @@
-    // onSuccess Geolocation
-    //
-    function onGeoSuccess(position) {
-		//Save current position and data
-		geoLatitude = position.coords.latitude;
-		geoLongitude = position.coords.longitude;
-		geoAltitude = position.coords.altitude
-		geoAccuracy = position.coords.accuracy;
-		geoAltitudeAccuracy = position.coords.altitudeAccuracy;
-		geoHeading = position.coords.heading;
-		geoSpeed = position.coords.speed;
-		geoTimestamp = position.timestamp;
-    }
-
-    // onError Callback receives a PositionError object
-    //
-    function onGeoError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
-	
-	function reportGeoPosition(){
-		//post_to_url('http://my.spongy.dk/save_position.php',{'lat':geoLatitude,'long':'432','accu':'2','timestamp':'12.12.12 43:23'});
-        var element = document.getElementById('formpost');
-        element.innerHTML = 'Latitude: '           + geoLatitude            + '<br />' +
-                            'Longitude: '          + geoLongitude           + '<br />' +
-                            'Altitude: '           + geoAltitude            + '<br />' +
-                            'Accuracy: '           + geoAccuracy            + '<br />' +
-                            'Altitude Accuracy: '  + geoAltitudeAccuracy    + '<br />' +
-                            'Heading: '            + geoHeading             + '<br />' +
-                            'Speed: '              + geoSpeed               + '<br />' +
-                            'Timestamp: '          + geoTimestamp			+ '<br />';
-		
-	}
-	
 	function post_to_url(path, params, method) {
 		alert('Tjek post_to_url 1');
 
