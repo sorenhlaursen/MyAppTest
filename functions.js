@@ -18,6 +18,10 @@
 		window.setInterval(function(){
 			navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
 		}, 500);
+		
+        var db = window.openDatabase("spongy", "0.9", "Spongy DB", 200000);
+        db.transaction(populateDB, errorCB, successCB);
+		
     }
 
     // onSuccess Geolocation
@@ -81,3 +85,31 @@
 		form.submit();
 		alert('Tjek post_to_url 2');
 	}
+	
+	
+// ==============================
+// DATABASE FUNCTIONS	|	START
+// ==============================
+    // Populate the database 
+    //
+    function populateDB(tx) {
+         tx.executeSql('DROP TABLE IF EXISTS DEMO');
+         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    }
+
+    // Transaction error callback
+    //
+    function errorCB(tx, err) {
+        alert("Error processing SQL: "+err);
+    }
+
+    // Transaction success callback
+    //
+    function successCB() {
+        alert("success!");
+    }
+// ============================
+// DATABASE FUNCTIONS	|	END
+// ============================
