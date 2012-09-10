@@ -1,30 +1,3 @@
-	//prepare variables for geo-data
-	var geoLatitude;
-	var geoLongitude;
-	var geoAltitude;
-	var geoAccuracy;
-	var geoAltitudeAccuracy;
-	var geoHeading;
-	var geoSpeed;
-	var geoTimestamp;
-	
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-		window.setInterval(function(){
-			navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
-		}, 500);
-		
-        var db = window.openDatabase("spongy", "0.9", "Spongy DB", 200000);
-		//db.do(commands, do if error, do if succes)
-        db.transaction(populateDB, errorCB, successCB);
-		
-    }
-
     // onSuccess Geolocation
     //
     function onGeoSuccess(position) {
