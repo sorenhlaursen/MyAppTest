@@ -6,6 +6,16 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
 
+	//prepare variables for geo-data
+	var geoLatitude;
+	var geoLongitude;
+	var geoAltitude;
+	var geoAccuracy;
+	var geoAltitudeAccuracy;
+	var geoHeading;
+	var geoSpeed;
+	var geoTimestamp;
+	
     // Wait for Cordova to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -21,6 +31,16 @@
     // onSuccess Geolocation
     //
     function onSuccess(position) {
+		//Save current position and data
+		geoLatitude = position.coords.latitude;
+		geoLongitude = position.coords.longitude;
+		geoAltitude = position.coords.altitude
+		geoAccuracy = position.coords.accuracy;
+		geoAltitudeAccuracy = position.coords.altitudeAccuracy;
+		geoHeading = position.coords.heading;
+		geoSpeed = position.coords.speed;
+		geoTimestamp = position.timestamp;
+
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
                             'Longitude: '          + position.coords.longitude             + '<br />' +
@@ -41,11 +61,19 @@
 	
 	function reportGeoPosition(){
 		alert('Tjek Report 1');
-		position = navigator.geolocation.getCurrentPosition();
-		var lat = position.coords.latitude;
-		alert(lat);
-		post_to_url('http://my.spongy.dk/save_position.php',{'lat':'lat','long':'432','accu':'2','timestamp':'12.12.12 43:23'});
+		alert(geoLatitude);
+		post_to_url('http://my.spongy.dk/save_position.php',{'lat':geoLatitude,'long':'432','accu':'2','timestamp':'12.12.12 43:23'});
 		alert('Tjek Report 2');
+        var element = document.getElementById('formpost');
+        element.innerHTML = 'Latitude: '           + geoLatitude              + '<br />' +
+                            'Longitude: '          + geoLongitude             + '<br />' +
+                            'Altitude: '           + geoAltitude              + '<br />' +
+                            'Accuracy: '           + geoAccuracy              + '<br />' +
+                            'Altitude Accuracy: '  + geoAltitudeAccuracy      + '<br />' +
+                            'Heading: '            + geoHeading               + '<br />' +
+                            'Speed: '              + geoSpeed                 + '<br />' +
+                            'Timestamp: '          + geoTimestamp          		   + '<br />';
+
 	}
 	
 	function post_to_url(path, params, method) {
@@ -82,5 +110,6 @@
   <body>
     <div id="geolocation">Finding geolocation...</div>
 	<p><a href="#" onclick="reportGeoPosition();" style="padding:5px;background:#8cb751;">Report position</a></p>
+	<div id="formpost"></div>
   </body>
 </html>
