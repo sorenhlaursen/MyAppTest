@@ -20,6 +20,7 @@
 		}, 500);
 		
         var db = window.openDatabase("spongy", "0.9", "Spongy DB", 200000);
+		//db.do(commands, do if error, do if succes)
         db.transaction(populateDB, errorCB, successCB);
 		
     }
