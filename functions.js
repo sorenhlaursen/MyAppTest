@@ -33,20 +33,20 @@
     //
     function populateDB(tx) {
          tx.executeSql('DROP TABLE IF EXISTS DEMO');
-         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+         tx.executeSql('CREATE TABLE IF NOT EXISTS myGeoLocations (timestamp, lat, long)');
+         tx.executeSql('INSERT INTO myGeoLocations (timestamp, lat, long) VALUES (10-09-2012 16:11, "55.64779924543545", "12.277518341750605" )');
+         tx.executeSql('INSERT INTO myGeoLocations (timestamp, lat, long) VALUES (01-09-2012 12:11, "55.64779924543545", "12.277518341750605")');
     }
 
     // Transaction error callback
     //
-    function errorCB(tx, err) {
+    function errorDB(tx, err) {
         alert("Error processing SQL: "+err);
     }
 
     // Transaction success callback
     //
-    function successCB() {
+    function successDB() {
         alert("success!");
     }
 // ============================
