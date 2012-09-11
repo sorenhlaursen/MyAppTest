@@ -32,9 +32,9 @@
     // Populate the database 
     //
     function populateDB(tx) {
-         tx.executeSql('DROP TABLE IF EXISTS DEMO');
+         tx.executeSql('DROP TABLE IF EXISTS myGeoLocations');
          tx.executeSql('CREATE TABLE IF NOT EXISTS myGeoLocations (timestamp, lat, long)');
-         tx.executeSql('INSERT INTO myGeoLocations (timestamp, lat, long) VALUES (10-09-2012 16:11, "55.64779924543545", "12.277518341750605" )');
+         tx.executeSql('INSERT INTO myGeoLocations (timestamp, lat, long) VALUES (10-09-2012 16:11, "55.64779924543545", "12.277518341750605")');
          tx.executeSql('INSERT INTO myGeoLocations (timestamp, lat, long) VALUES (01-09-2012 12:11, "55.64779924543545", "12.277518341750605")');
     }
 
