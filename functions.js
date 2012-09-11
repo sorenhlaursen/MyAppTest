@@ -36,19 +36,32 @@
          tx.executeSql('CREATE TABLE IF NOT EXISTS myGeoLocations (timestamp, lat, long)');
 //         tx.executeSql('INSERT INTO myGeoLocations (timestamp, lat, long) VALUES (10-09-2012 16:11, "55.64779924543545", "12.277518341750605")');
 //         tx.executeSql('INSERT INTO myGeoLocations (timestamp, lat, long) VALUES (01-09-2012 12:11, "55.64779924543545", "12.277518341750605")');
+         tx.executeSql('INSERT INTO myGeoLocations (timestamp, lat, long) VALUES ()');
     }
 
     // Transaction error callback
     //
-    function errorDB(tx, err) {
+    function errorCB(tx, err) {
         alert("Error processing SQL: "+err);
     }
 
     // Transaction success callback
     //
-    function successDB() {
+    function successCB() {
         alert("success!");
     }
+    
+	function queryGetLatestGeo(tx) {
+	    tx.executeSql('SELECT * FROM myGeoLocations', [], querySuccess, errorCB);
+	}
+	
+	function querySuccess(tx, results) {
+	    var len = results.rows.length;
+	    console.log("myGeoLocations table: " + len + " rows found.");
+	    for (var i=0; i<len; i++){
+	        console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+	    }
+	}
 // ============================
 // DATABASE FUNCTIONS	|	END
 // ============================
