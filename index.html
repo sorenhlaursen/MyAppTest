@@ -36,10 +36,10 @@
 			tx.executeSql('DROP TABLE IF EXISTS myPosition');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS myPosition (geoID integer primary key, geoLatitude float, geoLongitude float, geoAltitude float, geoAccuracy integer, timestampLocal integer, timestampServer integer, geoNote text, shareWithFriends boolean, shareWithPublic boolean)');
 			tx.executeSql("INSERT INTO myPosition (geoLatitude, geoLongitude) VALUES (?,?)", [55.6477413, 12.2775123], function(tx, res) {
-				consoleOutput.innerHTML = 	"insertId: " + res.insertId + " -- probably 1" + 
+				alert("insertId: " + res.insertId + " -- probably 1" + 
 											"rowsAffected: " + res.rowsAffected + " -- should be 1" +
 											"insertId: " + res.insertId + " -- probably 1"+
-											"rowsAffected: " + res.rowsAffected + " -- should be 1";
+											"rowsAffected: " + res.rowsAffected + " -- should be 1");
 			}, function(e) {
 				consoleOutput.innerHTML =	"ERROR: " + e.message;
 			});
@@ -53,6 +53,9 @@
 											"res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1";
 			});
 		});
+		
+		var test = document.getElementById('console');
+        test.innerHTML = 'nothings happening...';
 		
     }
 
