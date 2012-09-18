@@ -100,7 +100,7 @@
 	
 	function reportGeoPosition(){
 		//post_to_url('http://my.spongy.dk/save_position.php',{'lat':geoLatitude,'long':'432','accu':'2','timestamp':'12.12.12 43:23'});
-        var element = document.getElementById('formpost');
+        var element = document.getElementById('geoData');
         element.innerHTML = 'Latitude: '           + geoLatitude            + '<br />' +
                             'Longitude: '          + geoLongitude           + '<br />' +
                             'Altitude: '           + geoAltitude            + '<br />' +
@@ -115,6 +115,9 @@
   </head>
   <body>
 	<p><a href="#" onclick="reportGeoPosition();" style="padding:5px;background:#8cb751;">Report position</a></p>
+	<div id="geoData"></div>
+	<div><hr></div>
 	<div id="output"></div>
+
   </body>
 </html>
