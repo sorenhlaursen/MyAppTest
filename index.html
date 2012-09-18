@@ -41,7 +41,7 @@
 											"insertId: " + res.insertId + " -- probably 1"+
 											"rowsAffected: " + res.rowsAffected + " -- should be 1");
 			}, function(e) {
-				consoleOutput.innerHTML =	"ERROR: " + e.message;
+				alert("ERROR: " + e.message);
 			});
 			alert("transaction_done");
 		});
@@ -54,7 +54,7 @@
 											"res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1";
 				alert("res.rows.length: " + res.rows.length + " -- should be 1"+
 											"res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
-			});
+			},alert('Error in select statement'));
 		});
 		
 		var test = document.getElementById('console');
