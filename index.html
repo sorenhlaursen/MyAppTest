@@ -33,8 +33,8 @@
 		
 		
 		db.transaction(function(tx) {
-			tx.executeSql('DROP TABLE IF EXISTS myPosition', [], alert('drop table succes'), alert('drop table failed'));
-			tx.executeSql('CREATE TABLE IF NOT EXISTS myPosition (geoID integer primary key, geoLatitude float, geoLongitude float, geoAltitude float, geoAccuracy integer, timestampLocal integer, timestampServer integer, geoNote text, shareWithFriends boolean, shareWithPublic boolean)', [], alert('create table succes'), alert('create table failed'));
+			tx.executeSql('DROP TABLE IF EXISTS myPosition');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS myPosition (geoID integer primary key, geoLatitude float, geoLongitude float, geoAltitude float, geoAccuracy integer, timestampLocal integer, timestampServer integer, geoNote text, shareWithFriends boolean, shareWithPublic boolean)');
 			tx.executeSql("INSERT INTO myPosition (geoLatitude, geoLongitude) VALUES (?,?)", ['55.6477413', '12.2775123'], function(tx, res) {
 				alert("insertId: " + res.insertId + " -- probably 1" + 
 											"rowsAffected: " + res.rowsAffected + " -- should be 1" +
@@ -49,12 +49,9 @@
 		
 		db.transaction(function(tx) {
 			tx.executeSql("select count(geoID) as cnt from myPosition;", [], function(tx, res) {
-				var consoleOutput = document.getElementById('console');
-				consoleOutput.innerHTML = 	"res.rows.length: " + res.rows.length + " -- should be 1"+
-											"res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1";
 				alert("res.rows.length: " + res.rows.length + " -- should be 1"+
 											"res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
-			},alert('Error in select statement'));
+			});
 		});
 		
 		var test = document.getElementById('console');
