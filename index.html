@@ -33,15 +33,15 @@
 		
 		
 		db.transaction(function(tx) {
-			tx.executeSql('DROP TABLE IF EXISTS myPosition');
-			tx.executeSql('CREATE TABLE IF NOT EXISTS myPosition (geoID integer primary key, geoLatitude float, geoLongitude float, geoAltitude float, geoAccuracy integer, timestampLocal integer, timestampServer integer, geoNote text, shareWithFriends boolean, shareWithPublic boolean)');
-			tx.executeSql("INSERT INTO myPosition (geoLatitude, geoLongitude) VALUES (?,?)", [55.6477413, 12.2775123], function(tx, res) {
+			tx.executeSql('DROP TABLE IF EXISTS myPosition', [], alert('drop table succes'), alert('drop table failed'));
+			tx.executeSql('CREATE TABLE IF NOT EXISTS myPosition (geoID integer primary key, geoLatitude float, geoLongitude float, geoAltitude float, geoAccuracy integer, timestampLocal integer, timestampServer integer, geoNote text, shareWithFriends boolean, shareWithPublic boolean)', [], alert('create table succes'), alert('create table failed'));
+			tx.executeSql("INSERT INTO myPosition (geoLatitude, geoLongitude) VALUES (?,?)", ['55.6477413', '12.2775123'], function(tx, res) {
 				alert("insertId: " + res.insertId + " -- probably 1" + 
 											"rowsAffected: " + res.rowsAffected + " -- should be 1" +
 											"insertId: " + res.insertId + " -- probably 1"+
 											"rowsAffected: " + res.rowsAffected + " -- should be 1");
 			}, function(e) {
-				alert("ERROR: " + e.message);
+				alert("insert ERROR: " + e.message);
 			});
 			alert("transaction_done");
 		});
