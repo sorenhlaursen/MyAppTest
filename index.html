@@ -31,7 +31,12 @@
 			navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
 		}, 500);
     
-	
+    	reBuildDB();
+    
+    }
+    
+		function reBuildDB()
+		{
 		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
 				
 		html5sql.process(
@@ -52,7 +57,7 @@
 		         alert("Error: " + error.message + " when processing " + statement);
 		     }        
 		 );		
-    }
+    	}
 
 		// FETCH SQL-RESULTS
 		function testDB(){
@@ -118,6 +123,7 @@
 	<div id="geoData"></div>
 	<div><hr></div>
 	<div id="output"></div>
+	<div><a href="#" onclick="reBuildDB();" style="padding:10px 20px;background:#80000">Rebuild DB</a></div>
 
   </body>
 </html>
