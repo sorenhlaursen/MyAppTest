@@ -30,13 +30,13 @@
 		window.setInterval(function(){
 			navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
 		}, 500);
-    
-    	reBuildDB();
-    
     }
     
 		function reBuildDB()
 		{
+			var output = document.getElementById('output');
+			output.innerHTML = 'Building DB...';
+		
 		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
 				
 		html5sql.process(
@@ -122,7 +122,7 @@
 	<p><a href="#" onclick="reportGeoPosition();" style="padding:5px;background:#808080;">Report position</a></p>
 	<div id="geoData"></div>
 	<div><hr></div>
-	<div id="output"></div>
+	<div id="output">No Database</div>
 	<div><a href="#" onclick="reBuildDB();" style="padding:10px 20px;background:#80000">Rebuild DB</a></div>
 
   </body>
