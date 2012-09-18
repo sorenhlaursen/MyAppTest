@@ -33,15 +33,21 @@
 		//CREATE TABLE IF NOT EXISTS myPosition (geoID integer primary key, geoLatitude float, geoLongitude float, geoAltitude float, geoAccuracy integer, timestampLocal integer, timestampServer integer, geoNote text, shareWithFriends boolean, shareWithPublic boolean)
 		
       db.transaction(function(tx) {
+      	alert('1');
         tx.executeSql('DROP TABLE IF EXISTS test_table');
+      	alert('2');
         tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
+      	alert('3');
 
         tx.executeSql("INSERT INTO test_table (data, data_num) VALUES (?,?)", ["test", 100], function(tx, res) {
         	alert('FUCK!!!!');
         }, function(e) {
           alert("insert ERROR: " + e.message);
         });
+        alert('4');
       });
+      
+	  alert('5');
       
 		var test = document.getElementById('console');
         test.innerHTML = 'nothings happening...';
