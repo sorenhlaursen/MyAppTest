@@ -49,8 +49,11 @@
 		
 		db.transaction(function(tx) {
 			tx.executeSql("select count(geoID) as cnt from myPosition;", [], function(tx, res) {
+				var consoleOutput = document.getElementById('console');
 				consoleOutput.innerHTML = 	"res.rows.length: " + res.rows.length + " -- should be 1"+
 											"res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1";
+				alert("res.rows.length: " + res.rows.length + " -- should be 1"+
+											"res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
 			});
 		});
 		
