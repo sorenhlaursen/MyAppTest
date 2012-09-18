@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Device Properties Example</title>
+    <title>Spongy</title>
 
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/functions.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/SQLitePlugin.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/html5sql.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" ></script>
+    
+    
 	<script type="text/javascript" charset="utf-8">
 	//prepare variables for geo-data
 	var geoLatitude;
@@ -27,32 +30,51 @@
 		window.setInterval(function(){
 			navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
 		}, 500);
-		
-		var db = window.sqlitePlugin.openDatabase("Spongy", "0.1", "Spongy DB", 200000);
-		var consoleOutput = document.getElementById('console');
-		//CREATE TABLE IF NOT EXISTS myPosition (geoID integer primary key, geoLatitude float, geoLongitude float, geoAltitude float, geoAccuracy integer, timestampLocal integer, timestampServer integer, geoNote text, shareWithFriends boolean, shareWithPublic boolean)
-		
-      db.transaction(function(tx) {
-      	alert('1');
-        tx.executeSql('DROP TABLE IF EXISTS test_table');
-      	alert('2');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
-      	alert('3');
-
-        tx.executeSql("INSERT INTO test_table (data, data_num) VALUES (?,?)", ["test", 100], function(tx, res) {
-        	alert('FUCK!!!!');
-        }, function(e) {
-          alert("insert ERROR: " + e.message);
-        });
-        alert('4');
-      });
-      
-	  alert('5');
-      
-		var test = document.getElementById('console');
-        test.innerHTML = 'nothings happening...';
-		
+    
+	
+		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
+				
+		html5sql.process(
+		     [
+		         "DROP TABLE IF EXISTS test;",
+		         "CREATE TABLE test (id INTEGER PRIMARY KEY, data TEXT);",
+			     "INSERT INTO test (data) VALUES ('One');", 
+			     "INSERT INTO test (data) VALUES ('Two');", 
+			     "INSERT INTO test (data) VALUES ('Three');", 
+			     "INSERT INTO test (data) VALUES ('Four');", 
+			     "INSERT INTO test (data) VALUES ('Five');"
+		     ],
+		     function(){
+		         alert("Success creating and inserting into Tables");
+		         testDB();
+		     },
+		     function(error, statement){
+		         alert("Error: " + error.message + " when processing " + statement);
+		     }        
+		 );		
     }
+
+		// FETCH SQL-RESULTS
+		function testDB(){
+			html5sql.process(
+			    ["SELECT * FROM test;"],
+			    function(transaction, results, rowsArray){
+			    	var outputRows = '';
+			      	for(var i = 0; i < rowsArray.length; i++){
+			        	//each row in the rowsArray represents a row retrieved from the database
+			        	var data = rowsArray[i].data;
+			        	outputRows = outputRows +data+ '<br/>';
+			      	}
+					var output = document.getElementById('output');
+			      	output.innerHTML = outputRows;
+
+			    },
+			    function(error, statement){
+			      //hande error here           
+			    }
+			);		
+		}
+
 
     // onSuccess Geolocation
     //
@@ -89,12 +111,10 @@
                             'Timestamp: '          + geoTimestamp			+ '<br />';
 		
 	}	
-	</script>
+	</script>    
   </head>
   <body>
 	<p><a href="#" onclick="reportGeoPosition();" style="padding:5px;background:#8cb751;">Report position</a></p>
-	<div id="formpost"></div>
-	<div><img src="http://heltnormalt.dk/img/strip/2012/09/18.jpg" alt="" style="width:90%;"></div>
-	<div id="console">Waiting...</div>
+	<div id="output"></div>
   </body>
 </html>

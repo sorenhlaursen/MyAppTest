@@ -1,0 +1,84 @@
+	<script type="text/javascript" charset="utf-8">
+	//prepare variables for geo-data
+	var geoLatitude;
+	var geoLongitude;
+	var geoAltitude;
+	var geoAccuracy;
+	var geoAltitudeAccuracy;
+	var geoHeading;
+	var geoSpeed;
+	var geoTimestamp;
+	
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+		window.setInterval(function(){
+			navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+		}, 500);
+		
+		var db = window.sqlitePlugin.openDatabase("Spongy", "0.1", "Spongy DB", 200000);
+		var consoleOutput = document.getElementById('console');
+		//CREATE TABLE IF NOT EXISTS myPosition (geoID integer primary key, geoLatitude float, geoLongitude float, geoAltitude float, geoAccuracy integer, timestampLocal integer, timestampServer integer, geoNote text, shareWithFriends boolean, shareWithPublic boolean)
+		
+      db.transaction(function(tx) {
+      	alert('1');
+        tx.executeSql('DROP TABLE IF EXISTS test_table');
+      	alert('2');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
+      	alert('3');
+
+        tx.executeSql("INSERT INTO test_table (data, data_num) VALUES (?,?)", ["test", 100], function(tx, res) {
+        	alert('FUCK!!!!');
+        }, function(e) {
+          alert("insert ERROR: " + e.message);
+        });
+        alert('4');
+      });
+      
+	  alert('5');
+      
+		var test = document.getElementById('console');
+        test.innerHTML = 'nothings happening...';
+		
+    }
+
+    // onSuccess Geolocation
+    //
+    function onGeoSuccess(position) {
+		//Save current position and data
+		geoLatitude = position.coords.latitude;
+		geoLongitude = position.coords.longitude;
+		geoAltitude = position.coords.altitude
+		geoAccuracy = position.coords.accuracy;
+		geoAltitudeAccuracy = position.coords.altitudeAccuracy;
+		geoHeading = position.coords.heading;
+		geoSpeed = position.coords.speed;
+		geoTimestamp = position.timestamp;
+		reportGeoPosition();
+    }
+
+    // onError Callback receives a PositionError object
+    //
+    function onGeoError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+	
+	function reportGeoPosition(){
+		//post_to_url('http://my.spongy.dk/save_position.php',{'lat':geoLatitude,'long':'432','accu':'2','timestamp':'12.12.12 43:23'});
+        var element = document.getElementById('formpost');
+        element.innerHTML = 'Latitude: '           + geoLatitude            + '<br />' +
+                            'Longitude: '          + geoLongitude           + '<br />' +
+                            'Altitude: '           + geoAltitude            + '<br />' +
+                            'Accuracy: '           + geoAccuracy            + '<br />' +
+                            'Altitude Accuracy: '  + geoAltitudeAccuracy    + '<br />' +
+                            'Heading: '            + geoHeading             + '<br />' +
+                            'Speed: '              + geoSpeed               + '<br />' +
+                            'Timestamp: '          + geoTimestamp			+ '<br />';
+		
+	}	
+	</script>
