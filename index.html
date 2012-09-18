@@ -30,7 +30,6 @@
 		
 		var db = window.sqlitePlugin.openDatabase("Spongy", "0.1", "Spongy DB", 200000);
 		var consoleOutput = document.getElementById('console');
-        element.innerHTML = 
 		
 		
 		db.transaction(function(tx) {
@@ -54,6 +53,7 @@
 											"res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1";
 			});
 		});
+		
     }
 
     // onSuccess Geolocation
