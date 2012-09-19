@@ -63,7 +63,6 @@
 		geoHeading = position.coords.heading;
 		geoSpeed = position.coords.speed;
 		geoTimestamp = position.timestamp;
-		reportGeoPosition();
     }
 
     // onError Callback receives a PositionError object
