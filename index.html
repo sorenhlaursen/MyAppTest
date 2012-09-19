@@ -31,16 +31,12 @@
 			navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
 		}, 500);
 		var status = document.getElementById('status');
+		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
     }
     
 		function reBuildDB()
 		{
-			var output = document.getElementById('output');
-			output.innerHTML = 'Building DB...';
-		
-		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
-
-		html5sql.process(
+			html5sql.process(
 		     [
 		        "DROP TABLE IF EXISTS myPosition;",
 				 "CREATE TABLE IF NOT EXISTS myPosition (userID INTEGER, geoLatitude FLOAT, geoLongitude FLOAT, geoAltitude FLOAT, geoAccuracy INTEGER, timestampLocal INTEGER, timestampServer INTEGER, geoNote TEXT, shareWithFriends INTEGER, shareWithPublic INTEGER, UNIQUE(userID,timestampLocal));"
