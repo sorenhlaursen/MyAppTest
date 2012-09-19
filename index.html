@@ -39,14 +39,11 @@
 			output.innerHTML = 'Building DB...';
 		
 		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
-		
-		var lat = Math.random()*100;
-		var lng = Math.random()*100 + 1;
+
 		html5sql.process(
 		     [
-		        //"DROP TABLE IF EXISTS myPosition;",
-				 "CREATE TABLE IF NOT EXISTS myPosition (userID INTEGER, geoLatitude FLOAT, geoLongitude FLOAT, geoAltitude FLOAT, geoAccuracy INTEGER, timestampLocal INTEGER, timestampServer INTEGER, geoNote TEXT, shareWithFriends INTEGER, shareWithPublic INTEGER, UNIQUE(userID,timestampLocal));",
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+lat+","+lng+");"
+		        "DROP TABLE IF EXISTS myPosition;",
+				 "CREATE TABLE IF NOT EXISTS myPosition (userID INTEGER, geoLatitude FLOAT, geoLongitude FLOAT, geoAltitude FLOAT, geoAccuracy INTEGER, timestampLocal INTEGER, timestampServer INTEGER, geoNote TEXT, shareWithFriends INTEGER, shareWithPublic INTEGER, UNIQUE(userID,timestampLocal));"
 		     ],
 		     function(){
 				status.innerHTML = "Success creating and inserting into Tables";
@@ -105,6 +102,21 @@
     }
 	
 	function reportGeoPosition(){
+		html5sql.process(
+		     [
+		        "INSERT INTO myPosition (userID, geoLatitude, geoLongitude, geoAltitude, geoAccuracy) VALUES (2,"+geoLatitude+","+geoLongitude+","+geoAltitude+","+geoAccuracy+");"
+		     ],
+		     function(){
+				status.innerHTML = "Success inserting GEOlocation into myPosition";
+		        testDB();
+		     },
+		     function(error, statement){
+		        status.innerHTML = "Error: " + error.message + " when processing " + statement;
+		     }
+		 );
+
+
+
 		//post_to_url('http://my.spongy.dk/save_position.php',{'lat':geoLatitude,'long':'432','accu':'2','timestamp':'12.12.12 43:23'});
         var element = document.getElementById('geoData');
         element.innerHTML = 'Latitude: '           + geoLatitude            + '<br />' +
@@ -116,7 +128,7 @@
                             'Speed: '              + geoSpeed               + '<br />' +
                             'Timestamp: '          + geoTimestamp			+ '<br />';
 		
-	}	
+	}
 	</script>    
   </head>
   <body>
