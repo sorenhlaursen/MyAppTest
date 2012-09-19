@@ -41,12 +41,6 @@
 			text-shadow: 1px 1px 1px #111;
 		}
 		
-		header {
-			position:fixed;
-			top:0px;
-			left:0;
-			width:100%;
-		}
 		footer {
 			position:fixed;
 			bottom:0px;
@@ -137,12 +131,6 @@
   </head>
   <body>
   	<header>
-		<p>
-			<a href="#" onclick="reportGeoPosition()">Save GPS to DB</a>
-			 | <a href="#" onclick="reBuildDB();">Rebuild DB</a>
-			 | <a href="#" onclick="testDB();">View DB</a>
-			 
-		</p>
   	</header>
   	<article id="index">
 		<div><hr>GPS: <hr><span id="geoData"></span></div>
@@ -160,6 +148,13 @@
   	</article>
 
   	<footer>
+		<p>
+			<a href="#" onclick="reportGeoPosition()">Save GPS to DB</a>
+			 | <a href="#" onclick="reBuildDB();">Rebuild DB</a>
+			 | <a href="#" onclick="testDB();">View DB</a>
+			 
+		</p>
+		<hr>
   		<p style="float:right">Spongy v.0.1</p>
   		<p>2012 &copy; Zocializr.com</p>
   	</footer>
