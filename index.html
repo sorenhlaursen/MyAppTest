@@ -39,12 +39,14 @@
 			output.innerHTML = 'Building DB...';
 		
 		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
-				
+		
+		var lat = Math.random()*100;
+		var lng = Math.random()*100 + 1;
 		html5sql.process(
 		     [
 		        //"DROP TABLE IF EXISTS myPosition;",
 				 "CREATE TABLE IF NOT EXISTS myPosition (userID INTEGER, geoLatitude FLOAT, geoLongitude FLOAT, geoAltitude FLOAT, geoAccuracy INTEGER, timestampLocal INTEGER, timestampServer INTEGER, geoNote TEXT, shareWithFriends INTEGER, shareWithPublic INTEGER, UNIQUE(userID,timestampLocal));",
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");"
+			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+lat+","+lng+");"
 		     ],
 		     function(){
 				status.innerHTML = "Success creating and inserting into Tables";
