@@ -29,7 +29,7 @@
 			        	var userID = rowsArray[i].userID;
 			        	var geoLat = rowsArray[i].geoLatitude;
 			        	var geoLong = rowsArray[i].geoLongitude;
-			        	outputRows = outputRows +userID+'<br/>'+geoLat+' # '+geoLong+ '<br/>';
+			        	outputRows = outputRows +userID+': '+geoLat+' # '+geoLong+ '<br/>';
 			      	}
 					var output = document.getElementById('output');
 			      	output.innerHTML = outputRows;
