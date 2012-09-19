@@ -7,19 +7,76 @@
     <script type="text/javascript" charset="utf-8" src="js/functions.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/html5sql.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" ></script>
-    
+    <style>
+		@media only screen and (min-width: 999px) {
+		  /* rules that only apply for canvases bigger than 1000px */
+			body,html {
+				max-width:320px;
+				min-height:480px;
+				margin: 50px auto;
+			}
+			html {background:#111;}
+			body {background:#ccc;}
+		}
+		body{
+			position:relative;
+			padding:5px;
+			font-family:Verdana;
+			font-size:11px;
+			color:#333330;
+		}
+		
+		a:link, a:visited {
+			background:#94090D;
+			color:#fff;
+			text-decoration:none;
+			padding: 3px 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			text-shadow: 1px 1px 1px #111;
+		}
+		
+		footer {
+			position:absolute;
+			bottom:0px;
+			left:0;
+			width:100%;
+			background:#DDD;
+			font-size:0.7em;
+		}
+		footer p{
+			padding:5px;
+			margin:0;
+			font-weight:bold;
+			color:#333330;
+		}
+		#form {
+			margin: 20px 0 0 0;
+			padding: 10px 0;
+			visibility:visible;
+		}
+		#form input,textarea{
+			font-size:1.5em;
+			width:90%;
+			padding:5px;
+			color:#333330;
+			border:2px solid #94090D;
+		}
+		#form .button {
+			color:#fff;
+			background: #94090D;
+			padding: 3px 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			text-shadow: 1px 1px 1px #111;			
+		}
+    </style>
     
 	<script type="text/javascript" charset="utf-8">
-	//prepare variables for geo-data
-	var geoLatitude;
-	var geoLongitude;
-	var geoAltitude;
-	var geoAccuracy;
-	var geoAltitudeAccuracy;
-	var geoHeading;
-	var geoSpeed;
-	var geoTimestamp;
-	
+
+
+//##### CORDOVA APP SCRIPT
+
     // Wait for Cordova to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -33,106 +90,65 @@
 		var status = document.getElementById('status');
 		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
     }
-    
-		function reBuildDB()
-		{
-			html5sql.process(
-		     [
-		        "DROP TABLE IF EXISTS myPosition;",
-				 "CREATE TABLE IF NOT EXISTS myPosition (userID INTEGER, geoLatitude FLOAT, geoLongitude FLOAT, geoAltitude FLOAT, geoAccuracy INTEGER, timestampLocal INTEGER, timestampServer INTEGER, geoNote TEXT, shareWithFriends INTEGER, shareWithPublic INTEGER, UNIQUE(userID,timestampLocal));"
-		     ],
-		     function(){
-				status.innerHTML = "Success creating and inserting into Tables";
-		        testDB();
-		     },
-		     function(error, statement){
-		        status.innerHTML = "Error: " + error.message + " when processing " + statement;
-		     }
-		 );		
-    	}
 
-		// FETCH SQL-RESULTS
-		function testDB(){
-			html5sql.process(
-			    ["SELECT * FROM myPosition;"],
-			    function(transaction, results, rowsArray){
-			    	var outputRows = '';
-			      	for(var i = 0; i < rowsArray.length; i++){
-			        	//each row in the rowsArray represents a row retrieved from the database
-			        	var userID = rowsArray[i].userID;
-			        	var geoLat = rowsArray[i].geoLatitude;
-			        	var geoLong = rowsArray[i].geoLongitude;
-			        	outputRows = outputRows +userID+'<br/>'+geoLat+' # '+geoLong+ '<br/>';
-			      	}
-					var output = document.getElementById('output');
-			      	output.innerHTML = outputRows;
-			    },
-			    function(error, statement){
-			      //hande error here           
-			    }
-			);		
-		}
+	//prepare variables for geo-data
+	var geoLatitude;
+	var geoLongitude;
+	var geoAltitude;
+	var geoAccuracy;
+	var geoAltitudeAccuracy;
+	var geoHeading;
+	var geoSpeed;
+	var geoTimestamp;
 
-
-    // onSuccess Geolocation
-    //
-    function onGeoSuccess(position) {
-		//Save current position and data
-		geoLatitude = position.coords.latitude;
-		geoLongitude = position.coords.longitude;
-		geoAltitude = position.coords.altitude
-		geoAccuracy = position.coords.accuracy;
-		geoAltitudeAccuracy = position.coords.altitudeAccuracy;
-		geoHeading = position.coords.heading;
-		geoSpeed = position.coords.speed;
-		geoTimestamp = position.timestamp;
-		reportGeoPosition();
-    }
-
-    // onError Callback receives a PositionError object
-    //
-    function onGeoError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
-	
-	function reportGeoPosition(){
-		html5sql.process(
-		     [
-		        "INSERT INTO myPosition (userID, geoLatitude, geoLongitude, geoAltitude, geoAccuracy) VALUES (2,"+geoLatitude+","+geoLongitude+","+geoAltitude+","+geoAccuracy+");"
-		     ],
-		     function(){
-				status.innerHTML = "Success inserting GEOlocation into myPosition";
-		        testDB();
-		     },
-		     function(error, statement){
-		        status.innerHTML = "Error: " + error.message + " when processing " + statement;
-		     }
-		 );
+//### CORDOVA SCRIPT END
 
 
 
-		//post_to_url('http://my.spongy.dk/save_position.php',{'lat':geoLatitude,'long':'432','accu':'2','timestamp':'12.12.12 43:23'});
-        var element = document.getElementById('geoData');
-        element.innerHTML = 'Latitude: '           + geoLatitude            + '<br />' +
-                            'Longitude: '          + geoLongitude           + '<br />' +
-                            'Altitude: '           + geoAltitude            + '<br />' +
-                            'Accuracy: '           + geoAccuracy            + '<br />' +
-                            'Altitude Accuracy: '  + geoAltitudeAccuracy    + '<br />' +
-                            'Heading: '            + geoHeading             + '<br />' +
-                            'Speed: '              + geoSpeed               + '<br />' +
-                            'Timestamp: '          + geoTimestamp			+ '<br />';
-		
-	}
+
+/* ### NON CORDOVA SCRIPT START
+	var status = document.getElementById('status');
+	html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
+	//prepare variables for geo-data
+	var geoLatitude = "55.123456789";
+	var geoLongitude = "12.123456789";
+	var geoAltitude = "12";
+	var geoAccuracy = "100";
+	var geoAltitudeAccuracy = "100";
+	var geoHeading = "100";
+	var geoSpeed = "100";
+	var geoTimestamp = "100";
+
+ ### NON CORDOVA SCRIPT END
+*/
+
 	</script>    
   </head>
   <body>
-	<p><a href="#" onclick="reportGeoPosition();" style="padding:5px;background:#808080;">Report position</a></p>
-	<div id="geoData"></div>
-	<div><hr></div>
-	<div><a href="#" onclick="reBuildDB();" style="padding:10px 20px;background:#80000">Rebuild DB</a></div>
-	<div id="status"></div>
-	<div id="output">No Database</div>
+  	<header>
+		<p>
+			<a href="#" onclick="goto('form')">Save GPS to DB</a>
+			 | <a href="#" onclick="reBuildDB();">Rebuild DB</a>
+		</p>
+  	</header>
+  	<article id="index">
+		<div><hr>GPS: <hr><span id="geoData"></span></div>
+		<div id="status"></div>
+		<div><hr>Database: <hr><span id="output">No Database</span></div>
+  	</article>
+  	
+  	<article id="form">
+  		<div id="newGeoPosition">Chatting with the GPS...</div>
+  		<form method="post" action="javascript:reportGeoPosition();">
+  			<input type="text" name="title" value="title" />
+  			<textarea name="comment">Comments</textarea>
+  			<input type="submit" name="saveposition" value="Save Spongy Spot" />
+  		</form>
+  	</article>
 
-  </body>
+  	<footer>
+  		<p style="float:right">Spongy v.0.1</p>
+  		<p>2012 &copy; Zocializr.com</p>
+  	</footer>
+</body>
 </html>
