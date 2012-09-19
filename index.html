@@ -42,15 +42,8 @@
 				
 		html5sql.process(
 		     [
-		         "DROP TABLE IF EXISTS test;",
-		         "DROP TABLE IF EXISTS myPosition;",
+		        //"DROP TABLE IF EXISTS myPosition;",
 				 "CREATE TABLE IF NOT EXISTS myPosition (userID INTEGER, geoLatitude FLOAT, geoLongitude FLOAT, geoAltitude FLOAT, geoAccuracy INTEGER, timestampLocal INTEGER, timestampServer INTEGER, geoNote TEXT, shareWithFriends INTEGER, shareWithPublic INTEGER, UNIQUE(userID,timestampLocal));",
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
 			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");"
 		     ],
 		     function(){
@@ -74,7 +67,7 @@
 			        	var userID = rowsArray[i].userID;
 			        	var geoLat = rowsArray[i].geoLat;
 			        	var geoLong = rowsArray[i].geoLong;
-			        	outputRows = outputRows +userID+': '+geoLatitude+' , '+geoLongitude+ '<br/>';
+			        	outputRows = outputRows +userID+'<br/>'+geoLatitude+' # '+geoLongitude+ '<br/>';
 			      	}
 					var output = document.getElementById('output');
 			      	output.innerHTML = outputRows;
@@ -128,9 +121,9 @@
 	<p><a href="#" onclick="reportGeoPosition();" style="padding:5px;background:#808080;">Report position</a></p>
 	<div id="geoData"></div>
 	<div><hr></div>
-	<div id="output">No Database</div>
 	<div><a href="#" onclick="reBuildDB();" style="padding:10px 20px;background:#80000">Rebuild DB</a></div>
 	<div id="status"></div>
+	<div id="output">No Database</div>
 
   </body>
 </html>
