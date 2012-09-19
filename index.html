@@ -45,11 +45,13 @@
 		         "DROP TABLE IF EXISTS test;",
 		         "DROP TABLE IF EXISTS myPosition;",
 				 "CREATE TABLE IF NOT EXISTS myPosition (userID INTEGER, geoLatitude FLOAT, geoLongitude FLOAT, geoAltitude FLOAT, geoAccuracy INTEGER, timestampLocal INTEGER, timestampServer INTEGER, geoNote TEXT, shareWithFriends INTEGER, shareWithPublic INTEGER, UNIQUE(userID,timestampLocal));",
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,55.64766889443216,12.27746374900625);", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (2,15.64766889443216,43.27746374900625);", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (3,52.64766889443216,54.27746374900625);", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (4,34.64766889443216,65.27746374900625);", 
-			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,76.64766889443216,76.27746374900625);"
+			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
+			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
+			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
+			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
+			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
+			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");", 
+			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,"+Math.random()*100+","+Math.random()*100+");"
 		     ],
 		     function(){
 				status.innerHTML = "Success creating and inserting into Tables";
