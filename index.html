@@ -60,13 +60,12 @@
 			      	for(var i = 0; i < rowsArray.length; i++){
 			        	//each row in the rowsArray represents a row retrieved from the database
 			        	var userID = rowsArray[i].userID;
-			        	var geoLat = rowsArray[i].geoLat;
-			        	var geoLong = rowsArray[i].geoLong;
-			        	outputRows = outputRows +userID+'<br/>'+geoLatitude+' # '+geoLongitude+ '<br/>';
+			        	var geoLat = rowsArray[i].geoLatitude;
+			        	var geoLong = rowsArray[i].geoLongitude;
+			        	outputRows = outputRows +userID+'<br/>'+geoLat+' # '+geoLong+ '<br/>';
 			      	}
 					var output = document.getElementById('output');
 			      	output.innerHTML = outputRows;
-
 			    },
 			    function(error, statement){
 			      //hande error here           
