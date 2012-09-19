@@ -42,6 +42,7 @@
 				
 		html5sql.process(
 		     [
+		         "DROP TABLE IF EXISTS test;",
 		         "DROP TABLE IF EXISTS myPosition;",
 				 "CREATE TABLE IF NOT EXISTS myPosition (userID INTEGER, geoLatitude FLOAT, geoLongitude FLOAT, geoAltitude FLOAT, geoAccuracy INTEGER, timestampLocal INTEGER, timestampServer INTEGER, geoNote TEXT, shareWithFriends INTEGER, shareWithPublic INTEGER, UNIQUE(userID,timestampLocal));",
 			     "INSERT INTO myPosition (userID, geoLatitude, geoLongitude) VALUES (1,55.64766889443216,12.27746374900625);", 
@@ -68,8 +69,10 @@
 			    	var outputRows = '';
 			      	for(var i = 0; i < rowsArray.length; i++){
 			        	//each row in the rowsArray represents a row retrieved from the database
-			        	var data = rowsArray[i].data;
-			        	outputRows = outputRows +data+ '<br/>';
+			        	var userID = rowsArray[i].userID;
+			        	var geoLat = rowsArray[i].geoLat;
+			        	var geoLong = rowsArray[i].geoLong;
+			        	outputRows = outputRows +userID+': '+geoLat+' , '+geoLong+ '<br/>';
 			      	}
 					var output = document.getElementById('output');
 			      	output.innerHTML = outputRows;
