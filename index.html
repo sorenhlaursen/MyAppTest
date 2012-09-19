@@ -21,11 +21,11 @@
 		body{
 			position:relative;
 			padding:0;
+			margin:0;
 			font-family:Verdana;
 			font-size:11px;
 			color:#333330;
 			width:100%;
-			min-height:680px;
 		}
 		
 		a:link, a:visited {
@@ -88,7 +88,7 @@
     function onDeviceReady() {
 		window.setInterval(function(){
 			navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
-		}, 500);
+		}, 1000);
 		var status = document.getElementById('status');
 		html5sql.openDatabase("com.zocializr.SpongyDB", "Spongy Database", 3*1024*1024);
     }
