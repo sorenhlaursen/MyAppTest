@@ -63,6 +63,15 @@
 		geoHeading = position.coords.heading;
 		geoSpeed = position.coords.speed;
 		geoTimestamp = position.timestamp;
+        var element = document.getElementById('geoData');
+        element.innerHTML = 'Latitude: '           + geoLatitude            + '<br />' +
+                            'Longitude: '          + geoLongitude           + '<br />' +
+                            'Altitude: '           + geoAltitude            + '<br />' +
+                            'Accuracy: '           + geoAccuracy            + '<br />' +
+                            'Altitude Accuracy: '  + geoAltitudeAccuracy    + '<br />' +
+                            'Heading: '            + geoHeading             + '<br />' +
+                            'Speed: '              + geoSpeed               + '<br />' +
+                            'Timestamp: '          + geoTimestamp			+ '<br />';
     }
 
     // onError Callback receives a PositionError object
@@ -89,17 +98,8 @@
 
 
 		//post_to_url('http://my.spongy.dk/save_position.php',{'lat':geoLatitude,'long':'432','accu':'2','timestamp':'12.12.12 43:23'});
-        var element = document.getElementById('geoData');
-        element.innerHTML = 'Latitude: '           + geoLatitude            + '<br />' +
-                            'Longitude: '          + geoLongitude           + '<br />' +
-                            'Altitude: '           + geoAltitude            + '<br />' +
-                            'Accuracy: '           + geoAccuracy            + '<br />' +
-                            'Altitude Accuracy: '  + geoAltitudeAccuracy    + '<br />' +
-                            'Heading: '            + geoHeading             + '<br />' +
-                            'Speed: '              + geoSpeed               + '<br />' +
-                            'Timestamp: '          + geoTimestamp			+ '<br />';
-		
 	}
+	
 // ============================
 // GEODATA FUNCTIONS	|	END
 // ============================
