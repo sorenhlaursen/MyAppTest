@@ -109,6 +109,7 @@
 //### CORDOVA SCRIPT END
 
 
+	var currentPage = "index";
 
 
 /* ### NON CORDOVA SCRIPT START
@@ -126,6 +127,13 @@
 
  ### NON CORDOVA SCRIPT END
 */
+
+
+function gotoAndSlide(next){
+	$("article").css("visibility", "hidden")
+	$("article[id="+next+"]").css("visibility", "visible")	
+}
+
 
 	</script>    
   </head>
@@ -149,7 +157,7 @@
 
   	<footer>
 		<p>
-			<a href="#" onclick="reportGeoPosition()">Save GPS to DB</a>
+			<a href="#" onclick="gotoAndSlide('form')">Save GPS to DB</a>
 			 | <a href="#" onclick="reBuildDB();">Rebuild DB</a>
 			 | <a href="#" onclick="testDB();">View DB</a>
 			 
